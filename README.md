@@ -14,19 +14,26 @@ This repository characterizes von Neumann entropy (VNE) distribution in Clifford
 
 ---
 
-## Unified VNE Theorem (T10)
+## Unified VNE Theorem (T10) — Revised March 2026
 
-For a 2N-qubit Clifford bridge circuit (Wave A → CNOT bridge → Wave B):
+For a 2N-qubit bridge circuit (Wave A → CNOT bridge → Wave B):
 
 ```
-VNE = Σᵢ H_binary(sin²(θ_Ai/2)) · [B_i ∉ X-eigenspace]
+VNE = Σᵢ H_binary((1 + √(cos²θ_Ai + sin²θ_Ai·Bx_i²)) / 2)
 ```
 
 - `H_binary(p) = −p·log₂(p) − (1−p)·log₂(1−p)`
 - `θ_Ai` = Bloch polar angle of qubit i in Wave A
-- `[B_i ∉ X-eigenspace]` = 1 unless B_i ∈ {|+⟩, |−⟩}
+- `Bx_i` = X-component of Bloch vector for qubit i in Wave B
 
-**Physical origin:** `CNOT(|ψ_A⟩, |+⟩) = |ψ_A⟩ ⊗ |+⟩` — X-eigenstates absorb CNOT without entanglement.
+**Key Discovery (v21):** VNE is **continuous** in Bx, not binary. The original formulation `[B_i ∉ X-eigenspace]` was an approximation valid only for Clifford gates. The exact formula shows VNE smoothly decreases as |Bx| → 1.
+
+**Physical origin:** CNOT entanglement power depends continuously on B's X-projection. Only By and Bz are irrelevant.
+
+**Special cases:**
+- Bx = ±1 (X-eigenstate) → VNE = 0
+- Bx = 0 → VNE = N·H_binary(sin²(θ/2))
+- 0 < |Bx| < 1 → VNE continuous intermediate value
 
 ---
 
